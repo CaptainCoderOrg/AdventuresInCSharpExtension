@@ -19,20 +19,40 @@
     ],
     "main": "./out/extension.js",
     "contributes": {
-        "commands": [
-            {
+        "commands": [{
                 "command": "adventures-in-c--extension.runProgram",
-                "title": "Adventures in C#: Run Shared Program"
+                "title": "Adventures in C#: Run Shared Program",
+                "icon": "$(play-circle)"
             },
             {
                 "command": "adventures-in-c--extension.generateProgramURL",
-                "title": "Adventures in C#: Generate Shareable URL"
+                "title": "Adventures in C#: Generate Shareable URL",
+                "icon": "$(live-share)"
             },
             {
                 "command": "adventures-in-c--extension.previewProgram",
-                "title": "Adventures in C#: Preview Shared Program"
+                "title": "Adventures in C#: Preview Shared Program",
+                "icon": "$(preview)"
             }
-        ]
+        ],
+        "menus": {
+            "editor/title": [{
+                    "command": "adventures-in-c--extension.runProgram",
+                    "when": "resourceFilename == Program.cs && resourceDirname =~ /SimpleProject/ &&  editorLangId == csharp && !notebookEditorFocused",
+                    "group": "navigation"
+                },
+                {
+                    "command": "adventures-in-c--extension.runProgram",
+                    "when": "resourceFilename == Program.cs && resourceDirname =~ /SimpleProject/ &&  editorLangId == csharp && !notebookEditorFocused",
+                    "group": "1_run"
+                },
+                {
+                    "command": "adventures-in-c--extension.generateProgramURL",
+                    "when": "resourceFilename == Program.cs &&  editorLangId == csharp && !notebookEditorFocused",
+                    "group": "navigation"
+                }
+            ]
+        }
     },
     "scripts": {
         "vscode:prepublish": "npm run compile",

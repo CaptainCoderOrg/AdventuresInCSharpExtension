@@ -4,6 +4,7 @@ All notable changes to the "adventures-in-c--extension" extension will be docume
 
 Check [Keep a Changelog](http://keepachangelog.com/) for recommendations on how to structure this file.
 
-## [Unreleased]
+## [0.0.4]
 
-- Initial release
+- Add Generate Shareable URL command
+- Add Preview Shared Program command

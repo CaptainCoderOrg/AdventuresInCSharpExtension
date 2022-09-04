@@ -1,18 +1,9 @@
-// https://share.captaincoder.org/?id=b3006e60-64f8-4a4b-a663-fdfad78ee452
-
-// The module 'vscode' contains the VS Code extensibility API
-// Import the module and reference it with the alias vscode in your code below
 import * as vscode from 'vscode';
 import * as fs from 'fs';
 import { Base64 } from 'js-base64';
 import * as axios from 'axios';
 import { sep } from 'path';
 
-// Load Shared Program
-// vscode://captain-coder.adventures-in-c--extension/load-shared-program?id=d5914972-fbda-46ff-9d66-81e96ad7ef67
-
-// this method is called when your extension is activated
-// your extension is activated the very first time the command is executed
 export function activate(context: vscode.ExtensionContext) {
 
 	let disposable = vscode.commands.registerCommand('adventures-in-c--extension.runProgram', () => {
@@ -104,8 +95,6 @@ function generateProgramURL() : void {
 	const fileUri = vscode.Uri.parse(editor.document.fileName);
 	const paths = fileUri.path.split(sep);
 	const fileName = paths[paths.length-1];
-	console.log(paths);
-	console.log(fileName);
 	if (fileName !== "Program.cs") {
 		vscode.window.showErrorMessage("Generating program URLs only works for Program.cs files.");
 		return;
@@ -114,10 +103,14 @@ function generateProgramURL() : void {
 	const uri = `https://us-central1-introtocsharp-a5eeb.cloudfunctions.net/createLoadProgramURL?programData=${base64Program}`;
 	axios.default.get(uri).then(response => {
 		const options = { title: "Share URL", value: response.data };
-		vscode.window.showInputBox(options);
+		vscode.window.showInputBox(options).then(result => {
+			if (result) {
+				vscode.commands.executeCommand('vscode.open', vscode.Uri.parse(result as string));
+			}
+		});
 	})
 	.catch(error => {
-		vscode.window.showErrorMessage(`Could not generate URL: ${error}`)
+		vscode.window.showErrorMessage(`Could not generate URL: ${error}`);
 	});
 }
 
