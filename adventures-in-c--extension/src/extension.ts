@@ -6,6 +6,7 @@ import * as vscode from 'vscode';
 import * as fs from 'fs';
 import { Base64 } from 'js-base64';
 import * as axios from 'axios';
+import { sep } from 'path';
 
 // Load Shared Program
 // vscode://captain-coder.adventures-in-c--extension/load-shared-program?id=d5914972-fbda-46ff-9d66-81e96ad7ef67
@@ -101,9 +102,10 @@ function generateProgramURL() : void {
 		return;
 	}
 	const fileUri = vscode.Uri.parse(editor.document.fileName);
-	const paths = fileUri.path.split('\\');
+	const paths = fileUri.path.split(sep);
 	const fileName = paths[paths.length-1];
-
+	console.log(paths);
+	console.log(fileName);
 	if (fileName !== "Program.cs") {
 		vscode.window.showErrorMessage("Generating program URLs only works for Program.cs files.");
 		return;
