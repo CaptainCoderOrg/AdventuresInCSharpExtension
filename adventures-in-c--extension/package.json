@@ -3,7 +3,7 @@
     "publisher": "captain-coder",
     "displayName": "Adventures in C# Extension",
     "description": "Companion Extension for Captain Coder's Adventures in C#",
-    "version": "0.0.2",
+    "version": "0.0.3",
     "preview": true,
     "icon": "captain-coder.png",
     "engines": {
@@ -19,10 +19,12 @@
     ],
     "main": "./out/extension.js",
     "contributes": {
-        "commands": [{
-            "command": "adventures-in-c--extension.runProgram",
-            "title": "Adventures in C#: Run Program"
-        }]
+        "commands": [
+            {
+                "command": "adventures-in-c--extension.runProgram",
+                "title": "Adventures in C#: Run Program"
+            }
+        ]
     },
     "scripts": {
         "vscode:prepublish": "npm run compile",
@@ -53,5 +55,8 @@
         "type": "git",
         "url": "https://github.com/CaptainCoderOrg/AdventuresInCSharpExtension.git"
     },
-    "homepage": "https://github.com/CaptainCoderOrg/AdventuresInCSharpExtension"
+    "homepage": "https://github.com/CaptainCoderOrg/AdventuresInCSharpExtension",
+    "dependencies": {
+        "js-base64": "^3.7.2"
+    }
 }

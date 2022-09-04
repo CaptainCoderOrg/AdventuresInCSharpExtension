@@ -1,8 +1,8 @@
 // The module 'vscode' contains the VS Code extensibility API
 // Import the module and reference it with the alias vscode in your code below
 import * as vscode from 'vscode';
-
 import * as fs from 'fs';
+import { Base64 } from 'js-base64';
 
 // this method is called when your extension is activated
 // your extension is activated the very first time the command is executed
@@ -71,7 +71,7 @@ function setupExtension() {
 }
 
 function getExtensionPath() : string {
-	return vscode.extensions.getExtension("captain-codergit .adventures-in-c--extension")!.extensionPath;
+	return vscode.extensions.getExtension("captain-coder.adventures-in-c--extension")!.extensionPath;
 }
 
 class URIHandler implements vscode.UriHandler {
@@ -88,7 +88,7 @@ class URIHandler implements vscode.UriHandler {
 			vscode.window.showErrorMessage("Unable to load program.");
 			return;
 		}
-		const programData = Buffer.from(query.substring(11), 'base64').toString();
+		const programData = Base64.decode(query.substring(11));
 		loadAndRunSimpleProgram(programData);
 	}
 }
