@@ -3,7 +3,7 @@
     "publisher": "captain-coder",
     "displayName": "Adventures in C# Extension",
     "description": "Companion Extension for Captain Coder's Adventures in C#",
-    "version": "0.0.3",
+    "version": "0.0.4",
     "preview": true,
     "icon": "captain-coder.png",
     "engines": {
@@ -22,7 +22,15 @@
         "commands": [
             {
                 "command": "adventures-in-c--extension.runProgram",
-                "title": "Adventures in C#: Run Program"
+                "title": "Adventures in C#: Run Shared Program"
+            },
+            {
+                "command": "adventures-in-c--extension.generateProgramURL",
+                "title": "Adventures in C#: Generate Shareable URL"
+            },
+            {
+                "command": "adventures-in-c--extension.previewProgram",
+                "title": "Adventures in C#: Preview Shared Program"
             }
         ]
     },
@@ -57,6 +65,7 @@
     },
     "homepage": "https://github.com/CaptainCoderOrg/AdventuresInCSharpExtension",
     "dependencies": {
+        "axios": "^0.27.2",
         "js-base64": "^3.7.2"
     }
 }
