@@ -37,6 +37,10 @@ No known issues.
 
 ## Release Notes
 
+### 0.0.5 - Beta Release
+
+Update extension to use POST method for generating URLs.
+
 ### 0.0.4 - Beta Release
 
 Add support for Generating and loading Shareable URLs.

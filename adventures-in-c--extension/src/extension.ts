@@ -100,9 +100,11 @@ function generateProgramURL() : void {
 		return;
 	}
 	const base64Program = Base64.encode(editor.document.getText());
-	const uri = `https://us-central1-introtocsharp-a5eeb.cloudfunctions.net/createLoadProgramURL?programData=${base64Program}`;
-	axios.default.get(uri).then(response => {
-		const options = { title: "Share URL", value: response.data };
+	const uri = `https://us-central1-introtocsharp-a5eeb.cloudfunctions.net/createLoadProgramURL`;
+	// eslint-disable-next-line @typescript-eslint/naming-convention
+	const config = { headers: {"Content-Type": "text/plain"} };
+	axios.default.post(uri, base64Program, config).then(response => {
+		const options = { title: "Share URL", value: response.data.result };
 		vscode.window.showInputBox(options).then(result => {
 			if (result) {
 				vscode.commands.executeCommand('vscode.open', vscode.Uri.parse(result as string));
