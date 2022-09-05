@@ -1,8 +1,9 @@
 # Change Log
 
-All notable changes to the "adventures-in-c--extension" extension will be documented in this file.
+## [0.0.5]
 
-Check [Keep a Changelog](http://keepachangelog.com/) for recommendations on how to structure this file.
+- Update to use new POST request for generating a share URL
+- Update to use new VSCode URI when loading Shared URL.
 
 ## [0.0.4]
 

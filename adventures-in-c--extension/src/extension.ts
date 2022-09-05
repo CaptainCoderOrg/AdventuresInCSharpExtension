@@ -133,12 +133,17 @@ class URIHandler implements vscode.UriHandler {
 	}
 
 	private loadSharedProject(query : string) {
-		if(!query.startsWith("program.cs=")) {
-			vscode.window.showErrorMessage("Unable to load program.");
+		if(!query.startsWith("id=")) {
+			vscode.window.showErrorMessage("Unable to load program, id missing.");
 			return;
 		}
-		const programData = Base64.decode(query.substring(11));
-		loadSimpleProgram(programData);
+		const url = `https://us-central1-introtocsharp-a5eeb.cloudfunctions.net/getLoadProgramURL?id=${query.substring(3)}`;
+		console.log(url);
+		axios.default.get(url).then(response => {
+			loadSimpleProgram(Base64.decode(response.data.result.code));
+		}).catch(error => {
+			vscode.window.showErrorMessage(`Unable to load Program.cs: ${error}`);
+		});
 	}
 
 	private loadSimpleProject(query : string) {

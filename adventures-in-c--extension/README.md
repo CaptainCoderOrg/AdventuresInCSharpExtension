@@ -39,7 +39,8 @@ No known issues.
 
 ### 0.0.5 - Beta Release
 
-Update extension to use POST method for generating URLs.
+* Update to use new POST request for generating a share URL
+* Update to use new VSCode URI when loading Shared URL.
 
 ### 0.0.4 - Beta Release
 
