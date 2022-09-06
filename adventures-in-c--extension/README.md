@@ -33,19 +33,7 @@ This extension does not add any settings.
 
 ## Known Issues
 
-No known issues.
 
 ## Release Notes
 
-### 0.0.5 - Beta Release
-
-* Update to use new POST request for generating a share URL
-* Update to use new VSCode URI when loading Shared URL.
-
-### 0.0.4 - Beta Release
-
-Add support for Generating and loading Shareable URLs.
-
-### 0.0.1 - Beta Release
-
-Basic URI functionality for loading simple example code from the web into VS Code.
+See [ChangeLog](CHANGELOG.md)

@@ -1,5 +1,7 @@
 # Change Log
+## [0.0.6]
 
+- Download compressed code and decompress locally for bandwidth.
 ## [0.0.5]
 
 - Update to use new POST request for generating a share URL

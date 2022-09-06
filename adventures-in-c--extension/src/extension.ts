@@ -3,6 +3,7 @@ import * as fs from 'fs';
 import { Base64 } from 'js-base64';
 import * as axios from 'axios';
 import { sep } from 'path';
+import * as LZString from "lz-string";
 
 export function activate(context: vscode.ExtensionContext) {
 
@@ -137,10 +138,17 @@ class URIHandler implements vscode.UriHandler {
 			vscode.window.showErrorMessage("Unable to load program, id missing.");
 			return;
 		}
-		const url = `https://us-central1-introtocsharp-a5eeb.cloudfunctions.net/getLoadProgramURL?id=${query.substring(3)}`;
+		const url = "https://us-central1-introtocsharp-a5eeb.cloudfunctions.net/getLoadProgramURL";
 		console.log(url);
-		axios.default.get(url).then(response => {
-			loadSimpleProgram(Base64.decode(response.data.result.code));
+		axios.default.get(url, {params: {id: query.substring(3), decompress: "false"}}).then(response => {
+			if (response.data.result.format === "base64") {
+				loadSimpleProgram(Base64.decode(response.data.result.code));
+			} else if (response.data.result.format === "lz-string-base64") {
+				console.log("Decompressing...");
+				loadSimpleProgram(Base64.decode(LZString.decompressFromBase64(response.data.result.code) as string));
+			} else {
+				vscode.window.showErrorMessage(`Unable to load Program.cs. Invalid format: ${response.data.result.format}`);
+			}
 		}).catch(error => {
 			vscode.window.showErrorMessage(`Unable to load Program.cs: ${error}`);
 		});

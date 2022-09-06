@@ -3,7 +3,7 @@
     "publisher": "captain-coder",
     "displayName": "Adventures in C# Extension",
     "description": "Companion Extension for Captain Coder's Adventures in C#",
-    "version": "0.0.5",
+    "version": "0.0.6",
     "preview": true,
     "icon": "captain-coder.png",
     "engines": {
@@ -19,7 +19,8 @@
     ],
     "main": "./out/extension.js",
     "contributes": {
-        "commands": [{
+        "commands": [
+            {
                 "command": "adventures-in-c--extension.runProgram",
                 "title": "Adventures in C#: Run Shared Program",
                 "icon": "$(play-circle)"
@@ -36,7 +37,8 @@
             }
         ],
         "menus": {
-            "editor/title": [{
+            "editor/title": [
+                {
                     "command": "adventures-in-c--extension.runProgram",
                     "when": "resourceFilename == Program.cs && resourceDirname =~ /SimpleProject/ &&  editorLangId == csharp && !notebookEditorFocused",
                     "group": "navigation"
@@ -64,6 +66,7 @@
     },
     "devDependencies": {
         "@types/glob": "^7.2.0",
+        "@types/lz-string": "^1.3.34",
         "@types/mocha": "^9.1.1",
         "@types/node": "16.x",
         "@types/vscode": "^1.71.0",
@@ -86,6 +89,7 @@
     "homepage": "https://github.com/CaptainCoderOrg/AdventuresInCSharpExtension",
     "dependencies": {
         "axios": "^0.27.2",
-        "js-base64": "^3.7.2"
+        "js-base64": "^3.7.2",
+        "lz-string": "^1.4.4"
     }
 }
