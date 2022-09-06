@@ -3,7 +3,7 @@
     "publisher": "captain-coder",
     "displayName": "Adventures in C# Extension",
     "description": "Companion Extension for Captain Coder's Adventures in C#",
-    "version": "0.0.8",
+    "version": "0.0.9",
     "preview": true,
     "icon": "captain-coder.png",
     "engines": {
