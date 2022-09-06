@@ -1,6 +1,11 @@
 # Change Log
 
-## [0.0.6]
+## [0.0.9]
+
+- Change run command to use default `cwd` rather than starting in the extension
+  directory. Runs the `SimpleProject/Program.csproj` using an absolute path.
+
+## [0.0.7]
 
 - Fix bug with `Program.cs` file path on Windows machines.
 

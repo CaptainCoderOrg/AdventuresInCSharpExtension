@@ -35,7 +35,7 @@ export function activate(context: vscode.ExtensionContext) {
 export function deactivate() {}
 
 function runProgram() {
-	const adventuresPath = getExtensionPath();
+	const csprojPath = getSimpleProjectCSProj();
 	openSimpleProgram();
 
 	let terminal = vscode.window.terminals.find(t => t.name=== "Adventures in C#");
@@ -43,14 +43,14 @@ function runProgram() {
 		terminal.dispose();
 	}
 
-	let options = { name: "Adventures in C#", cwd: adventuresPath };
+	let options = { name: "Adventures in C#" };
 	terminal = vscode.window.createTerminal(options);
 	terminal.show();
-	terminal.sendText("dotnet run --project SimpleProject/SimpleProject.csproj");
+	terminal.sendText(`dotnet run --project ${csprojPath}`);
 }
 
 function openSimpleProgram() {
-	const simpleProjectProgram = getExtensionPath() + "/SimpleProject/Program.cs";
+	const simpleProjectProgram = getSimpleProjectPath + `${sep}Program.cs`;
 	if(!fs.existsSync(simpleProjectProgram)){
 		vscode.window.showInformationMessage("No Program Found.");
 		return;
@@ -63,7 +63,7 @@ function openSimpleProgram() {
 }
 
 function loadSimpleProgram(programData : string) {
-	const simpleProjectProgram = getExtensionPath() + "/SimpleProject/Program.cs";
+	const simpleProjectProgram = getExtensionPath() + `${sep}SimpleProject${sep}Program.cs`;
 	fs.writeFileSync(simpleProjectProgram, programData);
 	openSimpleProgram();
 }
@@ -74,15 +74,12 @@ function loadAndRunSimpleProgram(programData : string) {
 }
 
 function setupExtension() {
-	const adventuresPath = getExtensionPath();
-	const simpleProjectPath = adventuresPath + "/SimpleProject/SimpleProject.csproj";
-	if (!fs.existsSync(adventuresPath)) {
-		fs.mkdirSync(adventuresPath);
-	}
-	if (!fs.existsSync(simpleProjectPath)) {
-		let options = { name: "Adventures in C# Setup", cwd: adventuresPath };
+	const simpleProjectPath = getSimpleProjectPath();
+	const csprojPath = getSimpleProjectCSProj();
+	if (!fs.existsSync(csprojPath)) {
+		let options = { name: "Adventures in C# Setup" };
 		let terminal = vscode.window.createTerminal(options);
-		terminal.sendText("dotnet new console -o SimpleProject");
+		terminal.sendText(`dotnet new console -o ${simpleProjectPath}`);
 		terminal.sendText("exit");
 	}
 }
@@ -118,6 +115,14 @@ function generateProgramURL() : void {
 
 function getExtensionPath() : string {
 	return vscode.extensions.getExtension("captain-coder.adventures-in-c--extension")!.extensionPath;
+}
+
+function getSimpleProjectPath() : string {
+	return getExtensionPath() + `${sep}SimpleProject`;
+}
+
+function getSimpleProjectCSProj() : string {
+	return getSimpleProjectPath() + `${sep}SimpleProject.csproj`;
 }
 
 class URIHandler implements vscode.UriHandler {
