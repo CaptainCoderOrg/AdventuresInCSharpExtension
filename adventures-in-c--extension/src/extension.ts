@@ -94,10 +94,9 @@ function generateProgramURL() : void {
 		return;
 	}
 	const fileUri = vscode.Uri.parse(editor.document.fileName);
-	const paths = fileUri.path.split(sep);
-	const fileName = paths[paths.length-1];
-	if (fileName !== "Program.cs") {
+	if (!fileUri.path.endsWith("Program.cs")) {
 		vscode.window.showErrorMessage("Generating program URLs only works for Program.cs files.");
+		console.error(`Failed to generate program URL. URI was: ${fileUri.path}`);
 		return;
 	}
 	const base64Program = Base64.encode(editor.document.getText());
