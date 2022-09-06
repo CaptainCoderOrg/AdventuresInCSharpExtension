@@ -50,7 +50,7 @@ function runProgram() {
 }
 
 function openSimpleProgram() {
-	const simpleProjectProgram = getSimpleProjectPath + `${sep}Program.cs`;
+	const simpleProjectProgram = getSimpleProjectPath() + `${sep}Program.cs`;
 	if(!fs.existsSync(simpleProjectProgram)){
 		vscode.window.showInformationMessage("No Program Found.");
 		return;
@@ -143,12 +143,11 @@ class URIHandler implements vscode.UriHandler {
 			return;
 		}
 		const url = "https://us-central1-introtocsharp-a5eeb.cloudfunctions.net/getLoadProgramURL";
-		console.log(url);
 		axios.default.get(url, {params: {id: query.substring(3), decompress: "false"}}).then(response => {
 			if (response.data.result.format === "base64") {
 				loadSimpleProgram(Base64.decode(response.data.result.code));
 			} else if (response.data.result.format === "lz-string-base64") {
-				console.log("Decompressing...");
+				console.info("Decompressing...");
 				loadSimpleProgram(Base64.decode(LZString.decompressFromBase64(response.data.result.code) as string));
 			} else {
 				vscode.window.showErrorMessage(`Unable to load Program.cs. Invalid format: ${response.data.result.format}`);
