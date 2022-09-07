@@ -47,7 +47,7 @@ export function refreshToken(token: string | undefined) {
         const token: TokenManager = { 
             refreshToken: body.refresh_token, 
             accessToken: body.access_token,
-            expirationTime: new Date().getTime() + Number(body.expires_in),
+            expirationTime: new Date().getTime() + Number(body.expires_in)*1000,
             userId: body.user_id
         };
         saveToken(token);
