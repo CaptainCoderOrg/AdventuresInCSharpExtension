@@ -1,5 +1,17 @@
 # Change Log
 
+## [0.0.12]
+
+- Add `Adventures in C#: Authenticate` command for performing token based authentication against application.
+
+## [0.0.11]
+
+- Windows bug fix.
+
+## [0.0.10]
+
+- Windows bug fix.
+
 ## [0.0.9]
 
 - Change run command to use default `cwd` rather than starting in the extension
