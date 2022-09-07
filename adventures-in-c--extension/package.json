@@ -3,7 +3,7 @@
     "publisher": "captain-coder",
     "displayName": "Adventures in C# Extension",
     "description": "Companion Extension for Captain Coder's Adventures in C#",
-    "version": "0.0.15-beta",
+    "version": "0.0.15",
     "preview": true,
     "icon": "captain-coder.png",
     "engines": {
@@ -19,8 +19,7 @@
     ],
     "main": "./out/extension.js",
     "contributes": {
-        "commands": [
-            {
+        "commands": [{
                 "command": "adventures-in-c--extension.runProgram",
                 "title": "Adventures in C#: Run Shared Program",
                 "icon": "$(play-circle)"
@@ -45,8 +44,7 @@
             }
         ],
         "menus": {
-            "editor/title": [
-                {
+            "editor/title": [{
                     "command": "adventures-in-c--extension.runProgram",
                     "when": "resourceFilename == Program.cs && resourceDirname =~ /SimpleProject/ &&  editorLangId == csharp && !notebookEditorFocused",
                     "group": "navigation"
