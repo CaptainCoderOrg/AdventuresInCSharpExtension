@@ -1,5 +1,9 @@
 # Change Log
 
+## [0.0.14]
+
+- Fix bug caused by directory path having a `#` when sharing code.
+
 ## [0.0.13]
 
 - Reduce size of incoming authentication URI
