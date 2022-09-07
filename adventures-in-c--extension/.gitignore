@@ -1,3 +1,5 @@
 SimpleProject/
 .secrets/
 .auth/
+create-simple-project.log.txt
+dotnet.version.txt

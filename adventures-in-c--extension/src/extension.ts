@@ -2,10 +2,10 @@ import * as vscode from 'vscode';
 import * as fs from 'fs';
 import { Base64 } from 'js-base64';
 import * as axios from 'axios';
-import * as LZString from "lz-string";
 import { paths } from "./paths";
 import * as auth from "./auth";
 import { URIHandler } from './uriHandler';
+import * as setup from "./setup";
 
 export function activate(context: vscode.ExtensionContext) {
 
@@ -31,11 +31,15 @@ export function activate(context: vscode.ExtensionContext) {
 	});
 	context.subscriptions.push(disposable);
 
+	disposable = vscode.commands.registerCommand('adventures-in-c--extension.healthCheck', () => {
+		setup.setupCheck();
+	});
+	context.subscriptions.push(disposable);
+
 
 	disposable = vscode.window.registerUriHandler(new URIHandler());
 	context.subscriptions.push(disposable);
-
-	setupExtension();
+	setup.setupExtension();
 	console.debug("Adventures in C#: Extension Activated");
 }
 
@@ -78,14 +82,7 @@ export function loadAndRunSimpleProgram(programData : string) {
 	runProgram();
 }
 
-function setupExtension() {
-	if (!fs.existsSync(paths.simpleProject.csproj)) {
-		let options = { name: "Adventures in C# Setup" };
-		let terminal = vscode.window.createTerminal(options);
-		terminal.sendText(`dotnet new console -o ${paths.simpleProject.path}`);
-		terminal.sendText("exit");
-	}
-}
+
 
 function generateProgramURL() : void {
 	const editor = vscode.window.activeTextEditor;
