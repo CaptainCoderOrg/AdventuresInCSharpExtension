@@ -9,11 +9,19 @@ function getSimpleProjectPath() : string {
 	return getExtensionPath() + `${sep}SimpleProject`;
 }
 
+function getAuthPath() : string {
+    return getExtensionPath() + sep + ".auth";
+}
+
 export const paths = {
     extensionPath: getExtensionPath(),
     simpleProject: {
         path: getSimpleProjectPath(),
         csproj: getSimpleProjectPath() + sep + "SimpleProject.csproj",
         program: getSimpleProjectPath() + sep + "Program.cs",
+    },
+    auth: {
+        path: getAuthPath(),
+        token: getAuthPath() + sep + "token.json",
     }
 };

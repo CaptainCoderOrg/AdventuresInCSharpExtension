@@ -19,8 +19,7 @@
     ],
     "main": "./out/extension.js",
     "contributes": {
-        "commands": [
-            {
+        "commands": [{
                 "command": "adventures-in-c--extension.runProgram",
                 "title": "Adventures in C#: Run Shared Program",
                 "icon": "$(play-circle)"
@@ -34,11 +33,14 @@
                 "command": "adventures-in-c--extension.previewProgram",
                 "title": "Adventures in C#: Preview Shared Program",
                 "icon": "$(preview)"
+            },
+            {
+                "command": "adventures-in-c--extension.authenticate",
+                "title": "Adventures in C#: Authenticate"
             }
         ],
         "menus": {
-            "editor/title": [
-                {
+            "editor/title": [{
                     "command": "adventures-in-c--extension.runProgram",
                     "when": "resourceFilename == Program.cs && resourceDirname =~ /SimpleProject/ &&  editorLangId == csharp && !notebookEditorFocused",
                     "group": "navigation"
