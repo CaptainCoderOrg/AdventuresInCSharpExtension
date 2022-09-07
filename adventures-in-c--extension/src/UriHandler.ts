@@ -6,8 +6,8 @@ import { loadAndRunSimpleProgram, loadSimpleProgram } from "./extension";
 import * as auth from "./auth";
 
 export class URIHandler implements vscode.UriHandler {
-
 	handleUri(uri: vscode.Uri): vscode.ProviderResult<void> {
+		console.log(`Incoming URI: ${uri.path}`);
 		if (uri.path === "/auth") {
             const query = uri.query;
             if (!query.startsWith("token=")) {
@@ -16,7 +16,7 @@ export class URIHandler implements vscode.UriHandler {
                 return;
             }
             vscode.window.showInformationMessage("Authenticating Adventures in C#...");
-            auth.importToken(JSON.parse(Base64.decode(query.substring(6))));
+            auth.importToken(query.substring(6));
             return;
         }
 

@@ -22,9 +22,8 @@ export function openAuthURL() {
  * Given an TokenManager, attempts to import the token.
  * @param authInfo 
  */
-export function importToken(authInfo: TokenManager): void {
-    saveToken(authInfo);
-    refreshToken();
+export function importToken(token: string): void {
+    refreshToken(token);
     vscode.window.showInformationMessage("Adventures in C#: Authentication Successful!");
 }
 
@@ -32,15 +31,15 @@ export function importToken(authInfo: TokenManager): void {
  * Attempts to refresh the authentication Token.
  * @returns 
  */
-export function refreshToken() {
-    const token = getToken();
+export function refreshToken(token: string | undefined) {
+    token = token ?? getToken()?.refreshToken;
     if (token === undefined) {
         vscode.window.showErrorMessage("Cannot authenticate Adventures in C#.");
         return;
     }
 
     // eslint-disable-next-line @typescript-eslint/naming-convention
-    const body = { grant_type: "refresh_token", refresh_token: token.refreshToken };
+    const body = { grant_type: "refresh_token", refresh_token: token };
     const params = { key: config.firebaseConfig.webApiKey };
     const options = { params: params, body: body };
     axios.default.post(config.captainCoderConfig.tokenURL, body, options).then(result => {

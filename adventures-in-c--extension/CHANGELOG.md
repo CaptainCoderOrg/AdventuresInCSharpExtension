@@ -1,5 +1,9 @@
 # Change Log
 
+## [0.0.13]
+
+- Reduce size of incoming authentication URI
+
 ## [0.0.12]
 
 - Add `Adventures in C#: Authenticate` command for performing token based authentication against application.
