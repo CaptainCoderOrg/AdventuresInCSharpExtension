@@ -7,10 +7,17 @@ import { sep } from 'path';
 
 export function setupExtension() {
 	if (!fs.existsSync(paths.simpleProject.csproj)) {
-		let options = { name: "Adventures in C# Setup" };
+		let options = { name: "Adventures in C# Setup", cwd: paths.extensionPath };
 		let terminal = vscode.window.createTerminal(options);
-		terminal.sendText(`dotnet new console -o ${paths.simpleProject.path}`);
-		terminal.sendText("exit");
+		terminal.sendText(`dotnet new console -o ${paths.simpleProject.dirName}`);
+        setTimeout(() => {
+            if (fs.existsSync(paths.simpleProject.csproj)) {
+                vscode.window.showInformationMessage("Adventures in C# Extension: Setup Successful.");
+                terminal.sendText("exit");  
+            } else {
+                vscode.window.showErrorMessage("Adventures in C# Extension: Setup Failed.");
+            }        
+        }, 5000);
 	}
 }
 

@@ -17,6 +17,7 @@ export const paths = {
     extensionPath: getExtensionPath(),
     simpleProject: {
         path: getSimpleProjectPath(),
+        dirName: "SimpleProject",
         csproj: getSimpleProjectPath() + sep + "SimpleProject.csproj",
         program: getSimpleProjectPath() + sep + "Program.cs",
     },
