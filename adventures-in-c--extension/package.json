@@ -19,8 +19,7 @@
     ],
     "main": "./out/extension.js",
     "contributes": {
-        "commands": [
-            {
+        "commands": [{
                 "command": "adventures-in-c--extension.runProgram",
                 "title": "Adventures in C#: Run Shared Program",
                 "icon": "$(play-circle)"
@@ -45,8 +44,7 @@
             }
         ],
         "menus": {
-            "editor/title": [
-                {
+            "editor/title": [{
                     "command": "adventures-in-c--extension.runProgram",
                     "when": "resourceFilename == Program.cs && resourceDirname =~ /SimpleProject/ &&  editorLangId == csharp && !notebookEditorFocused",
                     "group": "navigation"

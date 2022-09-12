@@ -1,5 +1,9 @@
 # Change Log
 
+## [0.0.15]
+
+- Add `Adventures in C#: Run Health Check` command to help with debugging
+
 ## [0.0.14]
 
 - Fix bug caused by directory path having a `#` when sharing code.
