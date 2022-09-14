@@ -57,7 +57,7 @@ function runProgram() {
 	let options = { name: "Adventures in C#" };
 	terminal = vscode.window.createTerminal(options);
 	terminal.show();
-	terminal.sendText(`dotnet run --project ${paths.simpleProject.csproj}`);
+	terminal.sendText(`dotnet run --project '${paths.simpleProject.csproj}'`);
 }
 
 function openSimpleProgram() {

@@ -9,7 +9,7 @@ export function setupExtension() {
 	if (!fs.existsSync(paths.simpleProject.csproj)) {
 		let options = { name: "Adventures in C# Setup", cwd: paths.extensionPath };
 		let terminal = vscode.window.createTerminal(options);
-		terminal.sendText(`dotnet new console -o ${paths.simpleProject.dirName}`);
+		terminal.sendText(`dotnet new console -o '${paths.simpleProject.dirName}'`);
         setTimeout(() => {
             if (fs.existsSync(paths.simpleProject.csproj)) {
                 vscode.window.showInformationMessage("Adventures in C# Extension: Setup Successful.");
@@ -64,8 +64,8 @@ export function setupCheck() {
             openWindow(check, steps);
         }
     });
-    terminal.sendText(`dotnet --version 1> ${versionPath} 2>&1`);
-    terminal.sendText(`dotnet new console --force -o ${paths.simpleProject.path} > ${initLog} 2>&1`);
+    terminal.sendText(`dotnet --version 1> '${versionPath}' 2>&1`);
+    terminal.sendText(`dotnet new console --force -o '${paths.simpleProject.path}' > '${initLog}' 2>&1`);
     terminal.sendText("exit");
     vscode.window.showInformationMessage("Waiting for terminal to finish...");
 }

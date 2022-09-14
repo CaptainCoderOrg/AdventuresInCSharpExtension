@@ -1,8 +1,12 @@
 # Change Log
+
+## [0.0.17]
+
+- Fixes a bug that was caused on by using a `\` in paths on Windows while using a Unix based terminal.
+
 ## [0.0.16]
 
 - Add Success / Failure message when setup is run.
--
 ## [0.0.15]
 
 - Add `Adventures in C#: Run Health Check` command to help with debugging
