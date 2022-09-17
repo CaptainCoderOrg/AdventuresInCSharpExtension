@@ -1,5 +1,8 @@
 # Change Log
 
+## [0.0.18]
+- Adds `CaptainCoder.SimpleAudio` library to shared Program.cs files.
+
 ## [0.0.17]
 
 - Fixes a bug that was caused on by using a `\` in paths on Windows while using a Unix based terminal.

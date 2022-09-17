@@ -2,7 +2,7 @@ import * as vscode from "vscode";
 import * as axios from "axios";
 import { Base64 } from "js-base64";
 import LZString = require("lz-string");
-import { loadAndRunSimpleProgram, loadSimpleProgram } from "./extension";
+import * as run from "./run";
 import * as auth from "./auth";
 
 export class URIHandler implements vscode.UriHandler {
@@ -41,10 +41,10 @@ export class URIHandler implements vscode.UriHandler {
 		const url = "https://us-central1-introtocsharp-a5eeb.cloudfunctions.net/getLoadProgramURL";
 		axios.default.get(url, {params: {id: query.substring(3), decompress: "false"}}).then(response => {
 			if (response.data.result.format === "base64") {
-				loadSimpleProgram(Base64.decode(response.data.result.code));
+				run.loadSimpleProgram(Base64.decode(response.data.result.code));
 			} else if (response.data.result.format === "lz-string-base64") {
 				console.info("Decompressing...");
-				loadSimpleProgram(Base64.decode(LZString.decompressFromBase64(response.data.result.code) as string));
+				run.loadSimpleProgram(Base64.decode(LZString.decompressFromBase64(response.data.result.code) as string));
 			} else {
 				vscode.window.showErrorMessage(`Unable to load Program.cs. Invalid format: ${response.data.result.format}`);
 			}
@@ -59,6 +59,6 @@ export class URIHandler implements vscode.UriHandler {
 			return;
 		}
 		const programData = Base64.decode(query.substring(11));
-		loadAndRunSimpleProgram(programData);
+		run.loadAndRunSimpleProgram(programData);
 	}
 }

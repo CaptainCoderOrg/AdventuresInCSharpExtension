@@ -19,7 +19,9 @@ export const paths = {
         path: getSimpleProjectPath(),
         dirName: "SimpleProject",
         csproj: getSimpleProjectPath() + sep + "SimpleProject.csproj",
+        csprojTemplate: getExtensionPath() + sep + "Templates" + sep + "SimpleProject.csproj",
         program: getSimpleProjectPath() + sep + "Program.cs",
+
     },
     auth: {
         path: getAuthPath(),

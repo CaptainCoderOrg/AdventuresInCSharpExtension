@@ -1,22 +1,21 @@
 import * as vscode from 'vscode';
-import * as fs from 'fs';
 import { Base64 } from 'js-base64';
 import * as axios from 'axios';
-import { paths } from "./paths";
 import * as auth from "./auth";
 import { URIHandler } from './uriHandler';
 import * as setup from "./setup";
+import * as run from "./run";
 
 export function activate(context: vscode.ExtensionContext) {
 
 	let disposable = vscode.commands.registerCommand('adventures-in-c--extension.runProgram', () => {
 		vscode.window.showInformationMessage('Running Program');
-		runProgram();
+		run.runProgram();
 	});
 	context.subscriptions.push(disposable);
 
 	disposable = vscode.commands.registerCommand('adventures-in-c--extension.previewProgram', () => {
-		openSimpleProgram();
+		run.openSimpleProgram();
 	});
 	context.subscriptions.push(disposable);
 
@@ -45,44 +44,6 @@ export function activate(context: vscode.ExtensionContext) {
 
 // this method is called when your extension is deactivated
 export function deactivate() {}
-
-function runProgram() {
-	openSimpleProgram();
-
-	let terminal = vscode.window.terminals.find(t => t.name=== "Adventures in C#");
-	if (terminal !== undefined) {
-		terminal.dispose();
-	}
-
-	let options = { name: "Adventures in C#" };
-	terminal = vscode.window.createTerminal(options);
-	terminal.show();
-	terminal.sendText(`dotnet run --project '${paths.simpleProject.csproj}'`);
-}
-
-function openSimpleProgram() {
-	if(!fs.existsSync(paths.simpleProject.program)){
-		vscode.window.showInformationMessage("No Program Found.");
-		return;
-	}
-
-	vscode.workspace.openTextDocument(paths.simpleProject.program).then(doc => {
-		let options = { preview: true };
-		vscode.window.showTextDocument(doc, options);
-	});
-}
-
-export function loadSimpleProgram(programData : string) {
-	fs.writeFileSync(paths.simpleProject.program, programData);
-	openSimpleProgram();
-}
-
-export function loadAndRunSimpleProgram(programData : string) {
-	loadSimpleProgram(programData);
-	runProgram();
-}
-
-
 
 function generateProgramURL() : void {
 	const editor = vscode.window.activeTextEditor;
